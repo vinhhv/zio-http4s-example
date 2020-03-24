@@ -8,6 +8,7 @@ object Build {
     val enumeratum = "1.5.13"
     val http4s     = "0.21.1"
     val zio        = "1.0.0-RC18-2"
+    val zioCats    = "2.0.0.0-RC12"
     val zioMacros  = "0.5.0"
 
     // compiler plugins
@@ -18,6 +19,7 @@ object Build {
   val commonDeps = Seq(
       "com.beachape" %% "enumeratum"          % v.enumeratum
     , "dev.zio"      %% "zio"                 % v.zio
+    , "dev.zio"      %% "zio-interop-cats"    % v.zioCats
     , "dev.zio"      %% "zio-macros-core"     % v.zioMacros
     , "dev.zio"      %% "zio-macros-test"     % v.zioMacros
     , "org.tpolecat" %% "doobie-core"         % v.doobie

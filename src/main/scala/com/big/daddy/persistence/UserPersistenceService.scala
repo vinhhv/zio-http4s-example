@@ -2,7 +2,7 @@ package com.big.daddy
 package persistence
 
 import cats.effect.Blocker
-import com.big.daddy.configuration.{Configuration, DbConfig}
+import com.big.daddy.configuration.DbConfig
 import doobie.h2.H2Transactor
 import doobie.implicits._
 import doobie.util.query.Query0
@@ -72,12 +72,10 @@ object UserPersistenceService {
       .map(new UserPersistenceService(_))
   }
 
-  def live(connectEC: ExecutionContext): ZLayer[Has[DbConfig] with Blocking, Throwable, UserPersistenceService] =
-    ZLayer.fromManaged {
-      for {
-        config     <- configuration.dbConfig.toManaged_
-        blockingEC <- blocking.blocking { ZIO.descriptor.map(_.executor.asEC) }.toManaged_
-        managed    <- mkTransactor(config, connectEC, blockingEC)
-      } yield managed
-    }
+  def live(connectEC: ExecutionContext): ZLayer[Has[DbConfig] with Blocking, Throwable, Has[UserPersistenceService]] =
+    ZLayer.fromManaged(for {
+      config     <- configuration.Configuration.dbConfig.toManaged_
+      blockingEC <- blocking.blocking { ZIO.descriptor.map(_.executor.asEC) }.toManaged_
+      managed    <- mkTransactor(config, connectEC, blockingEC)
+    } yield managed)
 }

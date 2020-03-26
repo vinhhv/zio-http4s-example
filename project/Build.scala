@@ -7,6 +7,7 @@ object Build {
     val doobie     = "0.8.8"
     val enumeratum = "1.5.13"
     val http4s     = "0.21.1"
+    val pureConfig = "0.12.3"
     val zio        = "1.0.0-RC18-2"
     val zioCats    = "2.0.0.0-RC12"
     val zioMacros  = "0.5.0"
@@ -17,16 +18,17 @@ object Build {
   }
 
   val commonDeps = Seq(
-      "com.beachape" %% "enumeratum"          % v.enumeratum
-    , "dev.zio"      %% "zio"                 % v.zio
-    , "dev.zio"      %% "zio-interop-cats"    % v.zioCats
-    , "dev.zio"      %% "zio-macros-core"     % v.zioMacros
-    , "dev.zio"      %% "zio-macros-test"     % v.zioMacros
-    , "org.tpolecat" %% "doobie-core"         % v.doobie
-    , "org.tpolecat" %% "doobie-h2"           % v.doobie
-    , "org.http4s"   %% "http4s-blaze-server" % v.http4s
-    , "org.http4s"   %% "http4s-circe"        % v.http4s
-    , "org.http4s"   %% "http4s-dsl"          % v.http4s
+      "com.beachape"          %% "enumeratum"          % v.enumeratum
+    , "com.github.pureconfig" %% "pureconfig"          % v.pureConfig
+    , "dev.zio"               %% "zio"                 % v.zio
+    , "dev.zio"               %% "zio-interop-cats"    % v.zioCats
+    , "dev.zio"               %% "zio-macros-core"     % v.zioMacros
+    , "dev.zio"               %% "zio-macros-test"     % v.zioMacros
+    , "org.http4s"            %% "http4s-blaze-server" % v.http4s
+    , "org.http4s"            %% "http4s-circe"        % v.http4s
+    , "org.http4s"            %% "http4s-dsl"          % v.http4s
+    , "org.tpolecat"          %% "doobie-core"         % v.doobie
+    , "org.tpolecat"          %% "doobie-h2"           % v.doobie
   )
 
   val pluginDeps = Seq(

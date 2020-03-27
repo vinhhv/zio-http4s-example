@@ -4,6 +4,7 @@ import sbt.Keys._
 object Build {
   object v {
     // common
+    val circe      = "0.13.0"
     val doobie     = "0.8.8"
     val enumeratum = "1.5.13"
     val http4s     = "0.21.1"
@@ -18,17 +19,19 @@ object Build {
   }
 
   val commonDeps = Seq(
-      "com.beachape"          %% "enumeratum"          % v.enumeratum
-    , "com.github.pureconfig" %% "pureconfig"          % v.pureConfig
-    , "dev.zio"               %% "zio"                 % v.zio
-    , "dev.zio"               %% "zio-interop-cats"    % v.zioCats
-    , "dev.zio"               %% "zio-macros-core"     % v.zioMacros
-    , "dev.zio"               %% "zio-macros-test"     % v.zioMacros
-    , "org.http4s"            %% "http4s-blaze-server" % v.http4s
-    , "org.http4s"            %% "http4s-circe"        % v.http4s
-    , "org.http4s"            %% "http4s-dsl"          % v.http4s
-    , "org.tpolecat"          %% "doobie-core"         % v.doobie
-    , "org.tpolecat"          %% "doobie-h2"           % v.doobie
+      "com.beachape"          %% "enumeratum"           % v.enumeratum
+    , "com.github.pureconfig" %% "pureconfig"           % v.pureConfig
+    , "dev.zio"               %% "zio"                  % v.zio
+    , "dev.zio"               %% "zio-interop-cats"     % v.zioCats
+    , "dev.zio"               %% "zio-macros-core"      % v.zioMacros
+    , "dev.zio"               %% "zio-macros-test"      % v.zioMacros
+    , "io.circe"              %% "circe-generic"        % v.circe
+    , "io.circe"              %% "circe-generic-extras" % v.circe
+    , "org.http4s"            %% "http4s-blaze-server"  % v.http4s
+    , "org.http4s"            %% "http4s-circe"         % v.http4s
+    , "org.http4s"            %% "http4s-dsl"           % v.http4s
+    , "org.tpolecat"          %% "doobie-core"          % v.doobie
+    , "org.tpolecat"          %% "doobie-h2"            % v.doobie
   )
 
   val pluginDeps = Seq(

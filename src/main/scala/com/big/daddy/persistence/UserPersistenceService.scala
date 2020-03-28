@@ -8,8 +8,8 @@ import doobie.implicits._
 import doobie.util.query.Query0
 import doobie.util.transactor.Transactor
 import doobie.util.update.Update0
+import zio._
 import zio.blocking.Blocking
-import zio.{Has, Managed, Reservation, Task, ZIO, ZLayer, blocking}
 import zio.interop.catz._
 
 import scala.concurrent.ExecutionContext
@@ -72,7 +72,7 @@ object UserPersistenceService {
       .map(new UserPersistenceService(_))
   }
 
-  def live(connectEC: ExecutionContext): ZLayer[Has[DbConfig] with Blocking, Throwable, Has[UserPersistenceService]] =
+  def live(connectEC: ExecutionContext): ZLayer[Has[DbConfig] with Blocking, Throwable, UserPersistence] =
     ZLayer.fromManaged(for {
       config     <- configuration.Configuration.dbConfig.toManaged_
       blockingEC <- blocking.blocking { ZIO.descriptor.map(_.executor.asEC) }.toManaged_

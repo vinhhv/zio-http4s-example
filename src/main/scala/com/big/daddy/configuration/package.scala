@@ -1,7 +1,7 @@
 package com.big.daddy
 
 import pureconfig.ConfigSource
-import zio.{Has, Layer, Task, ZIO, ZLayer}
+import zio._
 
 package configuration {
 
@@ -17,7 +17,7 @@ package configuration {
 
     import pureconfig.generic.auto._
     val live: Layer[Throwable, Configuration] = ZLayer.fromEffectMany(
-      Task
+        Task
         .effect(ConfigSource.default.loadOrThrow[AppConfig])
         .map(c => Has(c.api) ++ Has(c.dbConfig))
     )
